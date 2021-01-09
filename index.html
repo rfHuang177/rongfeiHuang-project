@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- <div class="detail-box">
+        <div class="detail-card">
+
+            <div class="detail-content">
+                <img class="detail-poster" src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
+                <div class="detail-description">
+                    <h3>Wonder Woman 1984</h3>
+                    <h5>Overview</h5>
+                    <p>Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds
+                        a formidable foe by the name of the Cheetah.</p>
+                    <h5>Genres</h5>
+                    <div class="genres">
+                        <div name="Fantasy">Fantasy</div>
+                        <div name="Fantasy">Action</div>
+                        <div name="Fantasy">Adventure</div>
+                    </div>
+                    <h5>Rating</h5>
+                    <p>7.3</p>
+                    <h5>Production companies</h5>
+                    <img class="company-logo" src="https://image.tmdb.org/t/p/w500/2Tc1P3Ac8M479naPp1kYT3izLS5.png">
+                </div>
+            </div>
+            <ion-icon name="close" class="close-icon"></ion-icon>
+        </div>
+    </div> -->
+
+    <div class="page-content">
+      <div class="title-container">
+        <img src="TMDB logo.svg" class="main-icon" />
+
+        <ul class="home-liked-container">
+          <li class="HOME" onclick="tabSwitch(event)">HOME</li>
+
+          <li class="LIKED LIST" onclick="tabSwitch(event)">LIKED LIST</li>
+        </ul>
+      </div>
+      <div class="style-selector">
+        <select class="select-style">
+          <option value="Popular">Popular</option>
+          <option value="Now playing">Now playing</option>
+          <option value="Top rated">Top rated</option>
+          <option value="Upcoming">Upcoming</option>
+        </select>
+      </div>
+      <div class="prev-next">
+        <button class="prev-button">prev</button>
+        <div class="page-count-container"></div>
+        <button class="next-button">next</button>
+      </div>
+
+      <div class="movie-container"></div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</html>
