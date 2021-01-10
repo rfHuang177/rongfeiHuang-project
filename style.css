@@ -70,7 +70,7 @@ button {
   border-radius: 15px;
 }
 
-.like-button {
+.red-button {
   padding: 5px 10px;
   font-size: 12px;
   cursor: pointer;
@@ -98,7 +98,8 @@ button {
 button:hover {
   background-color: #01b4e4;
 }
-.like-button:hover {
+
+.red-button:hover {
   background-color: red;
 }
 
@@ -107,7 +108,7 @@ button:active {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-.like-button:active {
+.red-button:active {
   background-color: red;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -136,6 +137,11 @@ button:active {
   text-align: center;
   font-size: 15px;
   margin: 5px 0 0 0;
+  cursor: pointer;
+}
+
+.movie-name:hover {
+  color: #01b4e4;
 }
 
 .movie-vote {
@@ -162,14 +168,15 @@ button:active {
 }
 
 .close-icon {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+}
+
+.hide-box {
+  position: fixed;
 }
 
 .detail-box {
-  position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
-
   width: 100%;
   height: 100%;
   display: flex;
@@ -190,26 +197,35 @@ button:active {
 }
 
 .detail-poster {
+  margin: 0;
   width: 200px;
   height: 350px;
 }
 
 h3 {
+  margin: 0;
   font-size: 20px;
+  color: blue;
 }
 
 h5 {
+  margin: 0;
   font-size: 15px;
 }
 
 .detail-description {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(1fr, 4);
   height: 500px;
 }
 
 .detail-description p {
+  margin: 0;
   font-size: 10px;
 }
 
 .company-logo {
+  margin: 0;
   width: 20px;
 }

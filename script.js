@@ -23,6 +23,8 @@ const loadEvents = () => {
   const optionButton = document.querySelector(".select-style");
   const likedButtons = document.querySelectorAll(".liked-button");
   const likeButtons = document.querySelectorAll(".like-button");
+  const movieName = document.querySelectorAll(".movie-name");
+  const closeButton = document.querySelector("close-button");
 
   nextButton.addEventListener("click", nextPage);
   prevButton.addEventListener("click", prevPage);
@@ -33,18 +35,77 @@ const loadEvents = () => {
   Array.from(likeButtons).forEach((button) => {
     button.addEventListener("click", deleteLiked);
   });
+  Array.from(movieName).forEach((p) => {
+    p.addEventListener("click", getDetail);
+  });
+};
+
+const getDetail = (event) => {
+  console.log(1);
+  const movieId = event.target.id;
+  console.log(movieId);
+  const detailBox = document.querySelector(".detail-box");
+  detailBox.classList.add("hide-box");
+  detailBox.innerHTML = "";
+  fetch(`${baseUrl}/movie/${movieId}${apiKey}&language=en-US`, {
+    method: "get",
+  })
+    .then((resp) => resp.json())
+    .then((movie) => {
+      const movieDiv = document.createElement("div");
+      detailBox.appendChild(movieDiv);
+      movieDiv.className = "movie";
+      movieDiv.id = movie.id;
+      const innerHtml = `
+      <div class="detail-card">
+      <div class="detail-content">
+        <img
+          class="detail-poster"
+          src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"
+        />
+        <div class="detail-description">
+          <h3>${movie.original_title}</h3>
+          <h5>Overview</h5>
+          <p>
+            ${movie.overview}
+          </p>
+          <h5>Genres</h5>
+          <div class="genres">
+            <div name="Fantasy">${movie.genres[0].name}</div>
+           
+          </div>
+          <h5>Rating</h5>
+          <p>${movie.vote_average}</p>
+          <h5>Production companies</h5>
+          <img
+            class="company-logo"
+            src="https://image.tmdb.org/t/p/w500/${movie.production_companies[0].logo_path}"
+          />
+        </div>
+      </div>
+
+      <ion-icon name="close" class="close-icon" onclick="closeDetail()"></ion-icon>
+      
+    </div>`;
+      movieDiv.innerHTML = innerHtml;
+      loadEvents();
+    });
+};
+
+const closeDetail = () => {
+  console.log("close");
+  const detailBox = document.querySelector(".detail-box");
+  detailBox.innerHTML = "";
+  detailBox.classList.remove("hide-box");
 };
 
 const addLiked = (event) => {
   const movieId = event.target.id;
-
-  // event.target.className = "like-button";
+  event.target.classList.add("red-button");
   console.log(event.target.className);
   if (model.liked.indexOf(movieId) === -1) {
     model.liked.push(movieId);
     console.log(model.liked);
-    countPage();
-    createCard(model);
     return model.liked;
   } else {
     return model.liked;
@@ -52,7 +113,7 @@ const addLiked = (event) => {
 };
 
 const deleteLiked = (event) => {
-  event.target.className = "liked-button";
+  event.target.classList.remove("red-button");
   const currenId = event.target.id;
   console.log(currenId);
   const unlikeIndex = model.liked.indexOf(currenId);
@@ -117,9 +178,7 @@ const createLiked = (model) => {
         movieDiv.id = movie.id;
         const innerHtml = `
           <div class="movie-data" id="${movie.id}">
-            <img class="poster" src="https://image.tmdb.org/t/p/w500/${
-              movie.poster_path
-            }">
+            <img class="poster" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}">
             <p class="movie-name" id="${movie.id}">${movie.original_title}</p>
             <div class="movie-vote">
             <div class="vote">
@@ -127,9 +186,7 @@ const createLiked = (model) => {
             <p class="vote-score">${movie.vote_average}</p>
             </div>
             <button
-            class="like-button  ${
-              model.liked.includes(movie.id) ? "like-button" : ""
-            }"
+            class="like-button red-button"
             id="${movie.id}"
             >Liked!</button>
             </div>
@@ -163,7 +220,7 @@ const createCard = (Movie) => {
     movie.className = "movie";
     movie.id = Movie.results[i].id;
     const innerHtml = `
-    <div class="movie-data" id="${Movie.results[i].id}">z
+    <div class="movie-data" id="${Movie.results[i].id}">
         <img class="poster" src="https://image.tmdb.org/t/p/w500/${
           Movie.results[i].poster_path
         }">       
@@ -196,7 +253,6 @@ const getMovie = () => {
     .then((resp) => resp.json())
     .then((Movie) => {
       model.movies = Movie.results;
-      console.log(Movie.liked);
       innerHtml = "";
       if ((model.activeTab = TABS.HOME)) {
         createCard(Movie);
