@@ -24,7 +24,6 @@ const loadEvents = () => {
   const likedButtons = document.querySelectorAll(".liked-button");
   const likeButtons = document.querySelectorAll(".like-button");
   const movieName = document.querySelectorAll(".movie-name");
-  const closeButton = document.querySelector("close-button");
 
   nextButton.addEventListener("click", nextPage);
   prevButton.addEventListener("click", prevPage);
